@@ -7,7 +7,15 @@ morgan = require('morgan');
 app.use(morgan('dev'));
 //routes
 app.get('/', function(req, res) {
-    res.send('look im the app');
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/about', function(req, res) {
+    res.json({ message:'look im the about page' });
+});
+
+app.get('/contact', function(req, res) {
+    res.send('look im the contact page');
 });
 
 //start
