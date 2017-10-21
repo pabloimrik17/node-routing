@@ -37,6 +37,11 @@ app.post('/contact', function(req, res) {
     res.send("Hola "+ req.body.name);
 });
 
+app.get('/:username', function(req, res) {
+    console.log(req.params);
+    res.send('You are ' + req.params.username);
+});
+
 //start
 app.listen(port, function() {
     console.log('App listening on http://localhost:'+port);
