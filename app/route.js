@@ -1,8 +1,14 @@
+// Modules
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+
+// Controllers
 var siteController = require('./controllers/site.controller');
 var dashboardController = require('./controllers/dashboard.controller');
+
+// Middlewares
+var nameCheckMiddleware = require('./middleware/nameCheck');
 
 module.exports = router;
 
@@ -11,7 +17,7 @@ router.get('/', siteController.showHome);
 router.get('/about', siteController.showAbout);
 router.get('/contact', siteController.showContact);
 router.post('/contact', siteController.postContact);
-router.get('/profile/:username', siteController.showProfile);
+router.get('/profile/:username', nameCheckMiddleware, siteController.showProfile);
 
 // Dashboard Routes
 router.get('/dashboard', dashboardController.showDashboard);
