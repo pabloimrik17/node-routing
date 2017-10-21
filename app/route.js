@@ -1,40 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var siteController = require('./controllers/site.controller');
+var dashboardController = require('./controllers/dashboard.controller');
 
 module.exports = router;
 
-//routes
+// Site Routes
+router.get('/', siteController.showHome);
+router.get('/about', siteController.showAbout);
+router.get('/contact', siteController.showContact);
+router.post('/contact', siteController.postContact);
+router.get('/profile/:username', siteController.showProfile);
 
-router.get('/', showHome);
-router.get('/about', showAbout);
-router.get('/contact', showContact);
-router.post('/contact', postContact);
-router.get('/profile/:username', showProfile);
-router.use(show404);
+// Dashboard Routes
+router.get('/dashboard', dashboardController.showDashboard);
 
-function showHome(req, res) {
-    res.sendFile(path.join(__dirname, '../index.html'));
-}
-
-function showAbout(req, res) {
-    res.json({message: 'look im the about page'});
-}
-
-function showContact(req, res) {
-    res.sendFile(path.join(__dirname, '../contact.html'));
-}
-
-function showProfile(req, res) {
-    console.log(req.body);
-    res.send("Hola " + req.body.name);
-}
-
-function postContact(req, res) {
-    res.send('You are ' + req.params.username);
-}
+// API Routes
 
 // 404
+router.use(show404);
+
 function show404(req, res, next) {
     res.status(404);
 
