@@ -16,6 +16,6 @@ var router = require('./app/route');
 app.use(router);
 
 //start
-app.listen(port, function() {
-    console.log('App listening on http://localhost:'+port);
+app.listen(port, function () {
+    console.log('App listening on http://localhost:' + port);
 });
